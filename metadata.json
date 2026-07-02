@@ -1,0 +1,6 @@
+{
+  "name": "Gami Protocol",
+  "description": "Gami Protocol is an EVM-compatible Layer 1 blockchain purpose-built for on-chain gamification, AI-powered rewards, and universal engagement.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

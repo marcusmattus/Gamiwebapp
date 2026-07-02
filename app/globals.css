@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-gami-purple: #6E3CFB;
+  --color-gami-dark: #4B24B8;
+  --color-gami-accent: #9C6CFF;
+  --color-gami-bg: #0E0E12;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --shadow-brutal: 8px 8px 0px 0px #000000;
+  --shadow-brutal-purple: 8px 8px 0px 0px #6E3CFB;
+  --shadow-glow: 0 0 20px rgba(110, 60, 251, 0.4);
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; filter: blur(40px); }
+  50% { opacity: 0.8; filter: blur(60px); }
+}
+
+body {
+  @apply bg-gami-bg text-white font-sans antialiased;
+}
