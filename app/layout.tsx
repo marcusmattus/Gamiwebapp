@@ -29,14 +29,21 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}>
-      <body className="antialiased min-h-screen flex flex-col relative" suppressHydrationWarning>
+      <body className="antialiased min-h-screen flex flex-col relative bg-[#0E0E12] text-white" suppressHydrationWarning>
         <Navbar />
-        <main className="flex-1 pt-20">
+        <main className="flex-1 pt-[104px]">
           {children}
         </main>
-        <footer className="border-t border-white/10 py-12 text-center text-sm font-mono text-gray-500 mt-20">
-          <div className="max-w-7xl mx-auto px-4">
-            <p>&copy; {new Date().getFullYear()} Gami Protocol. All rights reserved.</p>
+        <footer className="relative z-10 px-6 md:px-10 py-6 border-t border-white/10 bg-black/40 flex flex-col md:flex-row items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/30 gap-4 mt-auto">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+            <span>Block: #19,204,112</span>
+            <span>Gas: 14 Gwei</span>
+            <span>Epoch: 402</span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+            <a href="#" className="hover:text-gami-purple transition-colors">Twitter/X</a>
+            <a href="#" className="hover:text-gami-purple transition-colors">Discord</a>
+            <a href="#" className="hover:text-gami-purple transition-colors">GitHub</a>
           </div>
         </footer>
       </body>
