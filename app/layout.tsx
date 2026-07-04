@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
+import { BackgroundAnimation } from '@/components/BackgroundAnimation';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}>
       <body className="antialiased min-h-screen flex flex-col relative bg-[#0E0E12] text-white" suppressHydrationWarning>
+        <BackgroundAnimation />
         <Navbar />
         <main className="flex-1 pt-[104px]">
           {children}
@@ -50,3 +52,4 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     </html>
   );
 }
+

@@ -35,14 +35,14 @@ export default function Home() {
             </Link>
             
             <Link 
-              href="/partners" 
+              href="/build" 
               className="border-2 border-white/20 px-8 py-4 font-bold uppercase text-sm tracking-widest backdrop-blur-sm flex items-center justify-center hover:bg-white/5 transition-colors"
             >
               Become Partner
             </Link>
 
             <Link 
-              href="/developers"
+              href="/build"
               className="bg-white text-black px-8 py-4 font-bold uppercase text-sm tracking-widest border-2 border-black shadow-[6px_6px_0px_0px_#6E3CFB] active:shadow-none transition-transform active:translate-x-1 active:translate-y-1 flex items-center justify-center"
             >
               Build with Gami

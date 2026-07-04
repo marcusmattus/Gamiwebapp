@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "WaitlistUser": {
+      "title": "WaitlistUser",
+      "description": "A user on the waitlist.",
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string" },
+        "walletAddress": { "type": "string" },
+        "preferredChain": { "type": "string" },
+        "role": { "type": "string" },
+        "refCode": { "type": "string" },
+        "referredBy": { "type": "string" },
+        "xp": { "type": "number" },
+        "referralCount": { "type": "number" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["firstName", "lastName", "email", "refCode", "xp", "referralCount", "createdAt"]
+    },
+    "PartnerApplication": {
+      "title": "PartnerApplication",
+      "description": "An application for partnership.",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "website": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "role": { "type": "string" },
+        "employeeCount": { "type": "string" },
+        "integrationDetails": { "type": "string" },
+        "partnerType": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["companyName", "website", "contactPerson", "role", "employeeCount", "integrationDetails", "partnerType", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "waitlist/{waitlistId}": {
+      "schema": { "$ref": "#/entities/WaitlistUser" },
+      "description": "Stores waitlist registrations."
+    },
+    "partners/{partnerId}": {
+      "schema": { "$ref": "#/entities/PartnerApplication" },
+      "description": "Stores partner applications."
+    }
+  }
+}

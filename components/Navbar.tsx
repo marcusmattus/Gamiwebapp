@@ -20,18 +20,20 @@ export default function Navbar() {
       
       <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/60 uppercase tracking-widest">
         <Link href="/waitlist" className="hover:text-white transition-colors">Waitlist</Link>
-        <Link href="/partners" className="hover:text-white transition-colors">Partners</Link>
-        <Link href="/developers" className="hover:text-white transition-colors">Developers</Link>
-        <Link href="/investors" className="hover:text-white transition-colors">Investors</Link>
-        <Link href="/token" className="hover:text-white transition-colors">$GAMI</Link>
+        <Link href="/build" className="hover:text-white transition-colors">Build</Link>
+        <Link href="/token" className="hover:text-white transition-colors">Tokenomics</Link>
+        <Link href="/whitepaper" className="hover:text-white transition-colors">Whitepaper</Link>
         <Link href="/tge" className="hover:text-white transition-colors">TGE</Link>
         <Link href="/roadmap" className="hover:text-white transition-colors">Roadmap</Link>
       </div>
 
-      <div className="hidden md:flex items-center">
-        <Link href="/waitlist" className="bg-white text-black px-6 py-2 font-bold uppercase text-xs tracking-tighter border-2 border-black shadow-[4px_4px_0px_0px_#6E3CFB] transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none">
-          Join Early
+      <div className="hidden md:flex items-center gap-4">
+        <Link href="/chat" className="text-white/60 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">
+          Launch App
         </Link>
+        <a href="https://privy.io" target="_blank" rel="noreferrer" className="bg-white text-black px-6 py-2 font-bold uppercase text-xs tracking-tighter border-2 border-black shadow-[4px_4px_0px_0px_#6E3CFB] transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none">
+          Connect Wallet
+        </a>
       </div>
 
       <div className="md:hidden flex items-center">
@@ -44,12 +46,12 @@ export default function Navbar() {
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-gami-bg border-b border-white/10 flex flex-col uppercase tracking-widest text-sm font-medium text-white/60">
           <Link href="/waitlist" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>Waitlist</Link>
-          <Link href="/partners" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>Partners</Link>
-          <Link href="/developers" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>Developers</Link>
-          <Link href="/investors" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>Investors</Link>
-          <Link href="/token" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>$GAMI</Link>
+          <Link href="/build" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>Build</Link>
+          <Link href="/token" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>Tokenomics</Link>
+          <Link href="/whitepaper" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>Whitepaper</Link>
           <Link href="/tge" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>TGE</Link>
-          <Link href="/roadmap" className="block px-6 py-4 hover:text-white" onClick={() => setIsOpen(false)}>Roadmap</Link>
+          <Link href="/roadmap" className="block px-6 py-4 border-b border-white/5 hover:text-white" onClick={() => setIsOpen(false)}>Roadmap</Link>
+          <a href="https://privy.io" target="_blank" rel="noreferrer" className="block px-6 py-4 hover:text-white font-bold text-[#9C6CFF]" onClick={() => setIsOpen(false)}>Connect Wallet</a>
         </div>
       )}
     </nav>
