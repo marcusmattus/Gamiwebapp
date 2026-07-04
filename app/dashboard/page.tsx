@@ -3,6 +3,18 @@
 import { useEffect, useState } from "react";
 import { LayoutDashboard, Users, Target, Activity, Settings, Zap, ArrowUpRight, BarChart3, Medal } from "lucide-react";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+
+const revenueData = [
+  { name: 'Jan', earnings: 4000 },
+  { name: 'Feb', earnings: 5000 },
+  { name: 'Mar', earnings: 4500 },
+  { name: 'Apr', earnings: 6000 },
+  { name: 'May', earnings: 8000 },
+  { name: 'Jun', earnings: 9500 },
+  { name: 'Jul', earnings: 12450 },
+];
 
 export default function PartnerDashboard() {
   const [config, setConfig] = useState<any>(null);
@@ -18,14 +30,14 @@ export default function PartnerDashboard() {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-[#0E0E12] pt-24 font-sans">
+    <div className="flex min-h-screen bg-background pt-24 font-sans text-foreground">
       
       {/* Sidebar */}
-      <div className="w-20 md:w-64 border-r border-white/10 bg-[#15151E] flex flex-col items-center md:items-stretch py-6 hidden sm:flex">
+      <div className="w-20 md:w-64 border-r border-border bg-panel flex flex-col items-center md:items-stretch py-6 hidden sm:flex">
         <div className="px-6 mb-8 hidden md:block">
-          <h2 className="font-black text-xl text-white uppercase tracking-tighter">Partner Portal</h2>
-          <div className="text-[10px] font-mono text-green-400 uppercase tracking-widest mt-1 flex items-center gap-2">
-            <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div> MCP Online
+          <h2 className="font-black text-xl text-foreground uppercase tracking-tighter">Partner Portal</h2>
+          <div className="text-[10px] font-mono text-green-500 uppercase tracking-widest mt-1 flex items-center gap-2">
+            <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div> MCP Online
           </div>
         </div>
 
@@ -44,14 +56,15 @@ export default function PartnerDashboard() {
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
             <div>
-              <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white">System Dashboard</h1>
-              <p className="text-white/50 text-sm mt-2">Monitor your Gami Protocol engagement metrics.</p>
+              <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-foreground">System Dashboard</h1>
+              <p className="text-muted text-sm mt-2">Monitor your Gami Protocol engagement metrics.</p>
             </div>
-            <div className="flex gap-4">
-              <button className="bg-[#15151E] border-2 border-black text-white px-4 py-2 font-bold uppercase text-xs tracking-widest shadow-[4px_4px_0px_0px_#000000]">
+            <div className="flex gap-4 items-center">
+              <ThemeToggle />
+              <button className="bg-panel border-2 border-border-strong text-foreground px-4 py-2 font-bold uppercase text-xs tracking-widest shadow-brutal active:shadow-none transition-all">
                 API Keys
               </button>
-              <Link href="/build" className="bg-[#6E3CFB] border-2 border-black text-white px-4 py-2 font-bold uppercase text-xs tracking-widest shadow-[4px_4px_0px_0px_#000000] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all flex items-center gap-2">
+              <Link href="/build" className="bg-accent border-2 border-border-strong text-accent-foreground px-4 py-2 font-bold uppercase text-xs tracking-widest shadow-brutal active:shadow-none active:translate-x-1 active:translate-y-1 transition-all flex items-center gap-2">
                 <Zap className="w-4 h-4" /> AI Generator
               </Link>
             </div>
@@ -65,11 +78,11 @@ export default function PartnerDashboard() {
               { label: "XP Distributed", value: "0", trend: "+0%" },
               { label: "Active Sessions", value: "0", trend: "+0%" },
             ].map((stat, i) => (
-              <div key={i} className="bg-[#15151E] border-2 border-black p-6 shadow-[4px_4px_0px_0px_#6E3CFB]">
-                <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-2">{stat.label}</div>
-                <div className="text-3xl font-black text-white flex items-end gap-3">
+              <div key={i} className="bg-panel border-2 border-border-strong p-6 shadow-brutal-purple">
+                <div className="text-[10px] font-mono text-muted uppercase tracking-widest mb-2">{stat.label}</div>
+                <div className="text-3xl font-black text-foreground flex items-end gap-3">
                   {stat.value}
-                  <span className="text-xs font-mono text-green-400 mb-1">{stat.trend}</span>
+                  <span className="text-xs font-mono text-green-500 mb-1">{stat.trend}</span>
                 </div>
               </div>
             ))}
@@ -78,23 +91,23 @@ export default function PartnerDashboard() {
           {/* AI Generated Config (if exists) */}
           {config && (
             <div className="mb-10">
-              <h2 className="text-xl font-black uppercase tracking-tighter text-white mb-4 flex items-center gap-2">
+              <h2 className="text-xl font-black uppercase tracking-tighter text-foreground mb-4 flex items-center gap-2">
                 <SparklesIcon /> Generated Gamification Logic
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
                 
                 {/* Quests */}
-                <div className="bg-[#15151E] border-2 border-black p-6 shadow-[6px_6px_0px_0px_#000000]">
+                <div className="bg-panel border-2 border-border-strong p-6 shadow-brutal">
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="font-bold uppercase tracking-widest text-sm text-[#9C6CFF]">Active Quests</h3>
-                    <Target className="w-5 h-5 text-white/40" />
+                    <Target className="w-5 h-5 text-muted" />
                   </div>
                   <div className="space-y-4">
                     {config.quests?.map((q: any, i: number) => (
-                      <div key={i} className="flex justify-between items-center p-3 border border-white/5 bg-black/50">
+                      <div key={i} className="flex justify-between items-center p-3 border border-border bg-foreground/5">
                         <div>
-                          <div className="font-bold text-sm text-white">{q.title}</div>
-                          <div className="text-xs text-white/50">{q.description}</div>
+                          <div className="font-bold text-sm text-foreground">{q.title}</div>
+                          <div className="text-xs text-muted">{q.description}</div>
                         </div>
                         <div className="text-xs font-black text-[#9C6CFF] whitespace-nowrap">+{q.xp} XP</div>
                       </div>
@@ -103,16 +116,16 @@ export default function PartnerDashboard() {
                 </div>
 
                 {/* Badges */}
-                <div className="bg-[#15151E] border-2 border-black p-6 shadow-[6px_6px_0px_0px_#000000]">
+                <div className="bg-panel border-2 border-border-strong p-6 shadow-brutal">
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="font-bold uppercase tracking-widest text-sm text-[#9C6CFF]">Badge Collection</h3>
-                    <Medal className="w-5 h-5 text-white/40" />
+                    <Medal className="w-5 h-5 text-muted" />
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {config.badges?.map((b: any, i: number) => (
-                      <div key={i} className="p-4 border border-[#6E3CFB]/30 bg-black flex flex-col items-center justify-center text-center gap-2">
+                      <div key={i} className="p-4 border border-accent/30 bg-foreground/10 flex flex-col items-center justify-center text-center gap-2">
                         <Medal className="w-6 h-6 text-[#9C6CFF]" />
-                        <span className="font-bold text-xs text-white uppercase tracking-tighter">{b.name}</span>
+                        <span className="font-bold text-xs text-foreground uppercase tracking-tighter">{b.name}</span>
                       </div>
                     ))}
                   </div>
@@ -123,56 +136,72 @@ export default function PartnerDashboard() {
           )}
 
           {/* Revenue Tracking Panel */}
-          <div className="bg-[#15151E] border-2 border-black p-8 shadow-[8px_8px_0px_0px_#000000] mb-10">
-            <h2 className="text-xl font-black uppercase tracking-tighter text-white mb-6 flex items-center gap-2">
+          <div className="bg-panel border-2 border-border-strong p-8 shadow-brutal mb-10">
+            <h2 className="text-xl font-black uppercase tracking-tighter text-foreground mb-6 flex items-center gap-2">
               <Activity className="w-5 h-5 text-[#9C6CFF]" /> Revenue & Earnings
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-black/50 border border-[#6E3CFB]/30 p-6">
-                <div className="text-[10px] font-mono text-white/50 uppercase tracking-widest mb-1">Estimated $GAMI Earnings</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-foreground/5 border border-accent/30 p-6">
+                <div className="text-[10px] font-mono text-muted uppercase tracking-widest mb-1">Estimated $GAMI Earnings</div>
                 <div className="text-3xl font-black text-[#9C6CFF]">12,450</div>
-                <div className="text-xs font-mono text-green-400 mt-2 flex items-center gap-1">
+                <div className="text-xs font-mono text-green-500 mt-2 flex items-center gap-1">
                   <ArrowUpRight className="w-3 h-3" /> +15% this month
                 </div>
               </div>
-              <div className="bg-black/50 border border-white/10 p-6">
-                <div className="text-[10px] font-mono text-white/50 uppercase tracking-widest mb-1">Platform Fees Generated</div>
-                <div className="text-3xl font-black text-white">$450.00</div>
-                <div className="text-xs font-mono text-white/40 mt-2">
+              <div className="bg-foreground/5 border border-border p-6">
+                <div className="text-[10px] font-mono text-muted uppercase tracking-widest mb-1">Platform Fees Generated</div>
+                <div className="text-3xl font-black text-foreground">$450.00</div>
+                <div className="text-xs font-mono text-muted mt-2">
                   USD equivalent value
                 </div>
               </div>
             </div>
+
+            <div className="h-72 w-full pt-4 border-t border-border">
+              <h3 className="text-xs font-mono text-muted uppercase tracking-widest mb-4">Earnings Over Time</h3>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={revenueData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                  <XAxis dataKey="name" stroke="currentColor" className="text-muted" fontSize={12} tickLine={false} axisLine={false} />
+                  <YAxis stroke="currentColor" className="text-muted" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--panel)', borderColor: 'var(--border)', color: 'var(--foreground)' }}
+                    itemStyle={{ color: '#9C6CFF' }}
+                  />
+                  <Line type="monotone" dataKey="earnings" stroke="#9C6CFF" strokeWidth={3} dot={{ fill: 'var(--panel)', stroke: '#9C6CFF', strokeWidth: 2, r: 4 }} activeDot={{ r: 6, fill: '#9C6CFF' }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
           {/* Setup Guide */}
-          <div className="bg-[#15151E] border-2 border-black p-8 shadow-[8px_8px_0px_0px_#6E3CFB]">
-             <h2 className="text-xl font-black uppercase tracking-tighter text-white mb-6">Integration Guide</h2>
+          <div className="bg-panel border-2 border-border-strong p-8 shadow-brutal-purple">
+             <h2 className="text-xl font-black uppercase tracking-tighter text-foreground mb-6">Integration Guide</h2>
              <div className="space-y-6">
                
                <div className="flex gap-4">
-                 <div className="w-8 h-8 rounded-full bg-[#6E3CFB] flex items-center justify-center font-black text-sm flex-shrink-0">1</div>
+                 <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center font-black text-sm flex-shrink-0 text-white">1</div>
                  <div>
-                   <h3 className="font-bold text-white mb-2">Install SDK</h3>
-                   <div className="bg-black border border-white/10 p-3 font-mono text-xs text-white/70">
+                   <h3 className="font-bold text-foreground mb-2">Install SDK</h3>
+                   <div className="bg-foreground/10 border border-border p-3 font-mono text-xs text-foreground/80">
                      npm install @gami/sdk
                    </div>
                  </div>
                </div>
 
                <div className="flex gap-4">
-                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-black text-sm flex-shrink-0 text-white/50">2</div>
+                 <div className="w-8 h-8 rounded-full bg-foreground/10 flex items-center justify-center font-black text-sm flex-shrink-0 text-muted">2</div>
                  <div>
-                   <h3 className="font-bold text-white mb-2 text-white/50">Initialize Client</h3>
-                   <p className="text-sm text-white/40">Use your API keys to connect your frontend to the Gami MCP network.</p>
+                   <h3 className="font-bold text-muted mb-2">Initialize Client</h3>
+                   <p className="text-sm text-muted">Use your API keys to connect your frontend to the Gami MCP network.</p>
                  </div>
                </div>
 
                <div className="flex gap-4">
-                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-black text-sm flex-shrink-0 text-white/50">3</div>
+                 <div className="w-8 h-8 rounded-full bg-foreground/10 flex items-center justify-center font-black text-sm flex-shrink-0 text-muted">3</div>
                  <div>
-                   <h3 className="font-bold text-white mb-2 text-white/50">Emit Events</h3>
-                   <p className="text-sm text-white/40">Trigger events in your app to automatically award XP and unlock quests based on your generated logic.</p>
+                   <h3 className="font-bold text-muted mb-2">Emit Events</h3>
+                   <p className="text-sm text-muted">Trigger events in your app to automatically award XP and unlock quests based on your generated logic.</p>
                  </div>
                </div>
 
@@ -188,7 +217,7 @@ export default function PartnerDashboard() {
 
 function NavItem({ href, icon, label, active = false }: { href: string; icon: React.ReactNode; label: string; active?: boolean }) {
   return (
-    <Link href={href} className={`flex items-center gap-3 p-3 transition-colors ${active ? 'bg-[#6E3CFB]/10 text-[#9C6CFF] border-r-2 border-[#9C6CFF]' : 'text-white/40 hover:bg-white/5 hover:text-white'}`}>
+    <Link href={href} className={`flex items-center gap-3 p-3 transition-colors ${active ? 'bg-accent/10 text-[#9C6CFF] border-r-2 border-[#9C6CFF]' : 'text-muted hover:bg-foreground/5 hover:text-foreground'}`}>
       {icon}
       <span className="font-bold uppercase tracking-widest text-[10px] hidden md:block">{label}</span>
     </Link>
